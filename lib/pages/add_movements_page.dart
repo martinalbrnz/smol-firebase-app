@@ -69,6 +69,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
           child: Column(
             children: [
               TextField(
+                maxLength: 8,
                 controller: _accountController,
                 enabled: true,
                 decoration: InputDecoration(
@@ -87,7 +88,8 @@ class _AddMovementPageState extends State<AddMovementPage> {
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly // Only numbers
+                  FilteringTextInputFormatter.allow(
+                      RegExp(r"(-*[\d]*\.?[\d]*)")), // Only numbers
                 ],
               ),
               TextField(

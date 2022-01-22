@@ -23,30 +23,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List movimientos = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getMovements();
-  }
-
-  void getMovements() async {
-    // Primero hacemos referencia a una coleccion
-    CollectionReference collectionReference =
-        FirebaseFirestore.instance.collection("movements");
-
-    // Nos devuelve de forma asincrona los documentos como lista
-    QuerySnapshot movements = await collectionReference.get();
-    // Si la cantidad de documentos es distinta de cero, es que cargo algun documento
-    if (movements.docs.isNotEmpty) {
-      for (var doc in movements.docs) {
-        setState(() {
-          movimientos.add(doc.data());
-        });
-      }
-    }
-  }
+  final Stream<QuerySnapshot> _movementsStream =
+      FirebaseFirestore.instance.collection('movements').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -54,17 +32,25 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("Smol app"),
       ),
-      body: Center(
-        child: ListView.builder(
-          itemBuilder: (context, i) {
-            return MovementCard(
-                movimientos[i]['description'],
-                movimientos[i]['account'],
-                movimientos[i]['amount'],
-                movimientos[i]['date']);
-          },
-          itemCount: movimientos.length,
-        ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _movementsStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          }
+
+          return ListView(
+            children: snapshot.data!.docs.map((DocumentSnapshot document) {
+              Map<String, dynamic> data =
+                  document.data()! as Map<String, dynamic>;
+              return MovementCard(data['description'], data['account'],
+                  data['amount'], data['date']);
+            }).toList(),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
