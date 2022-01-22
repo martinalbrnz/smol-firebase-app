@@ -4,17 +4,17 @@ An app to CRUD real time data of a business.
 
 ## Ready
 
-⋅⋅* Fetch financial data from Firebase
-⋅⋅* Visualize financial data in a ListView
-⋅⋅* Create financial data using a form
+- Fetch financial data from Firebase
+- Visualize financial data in a ListView
+- Create financial data using a form
 
 ## Pending
 
-⋅⋅* Update data
-⋅⋅* Erase data
-⋅⋅* CRUD for stock
-⋅⋅* CRUD for pricing
-⋅⋅* Login for users
+- Update data
+- Erase data
+- CRUD for stock
+- CRUD for pricing
+- Login for users
 
 ### Getting Started
 
