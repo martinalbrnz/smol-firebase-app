@@ -1,8 +1,22 @@
 # smolapp
 
-A new Flutter project.
+An app to CRUD real time data of a business.
 
-## Getting Started
+## Ready
+
+..* Fetch financial data from Firebase
+..* Visualize financial data in a ListView
+..* Create financial data using a form
+
+## Pending
+
+..* Update data
+..* Erase data
+..* CRUD for stock
+..* CRUD for pricing
+..* Login for users
+
+### Getting Started
 
 This project is a starting point for a Flutter application.
 
