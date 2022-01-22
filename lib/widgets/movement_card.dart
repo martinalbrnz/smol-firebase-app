@@ -27,42 +27,60 @@ class MovementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: amount > 0 ? Colors.green[100] : Colors.red[50],
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+    // ignore: sized_box_for_whitespace
+    return Container(
+      height: 80,
+      child: Card(
+        color: amount > 0 ? Colors.green[100] : Colors.red[50],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
                       convertTimestampToString(date),
-                      style: const TextStyle(fontSize: 16),
+                      style:
+                          const TextStyle(fontSize: 14, color: Colors.black45),
                     ),
                     Text(
-                      account,
-                      style: const TextStyle(fontSize: 16),
+                      description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 12,
+              ),
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      account,
+                      style:
+                          const TextStyle(fontSize: 14, color: Colors.black45),
+                    ),
+                    Text(
+                      '\$${amountFormat(amount)}',
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  description,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ],
-            ),
-            Text(
-              '\$${amountFormat(amount)}',
-              style: const TextStyle(fontSize: 20),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
