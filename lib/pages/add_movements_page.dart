@@ -38,7 +38,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
     return movements
         .add({
           'account': _accountController.text.toUpperCase(),
-          'amount': int.parse(_amountController.text),
+          'amount': double.parse(_amountController.text),
           'description': _descriptionController.text,
           'date': date
         })
@@ -69,7 +69,6 @@ class _AddMovementPageState extends State<AddMovementPage> {
           child: Column(
             children: [
               TextField(
-                maxLength: 8,
                 controller: _accountController,
                 enabled: true,
                 decoration: InputDecoration(

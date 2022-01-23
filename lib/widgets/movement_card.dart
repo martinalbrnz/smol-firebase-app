@@ -31,7 +31,7 @@ class MovementCard extends StatelessWidget {
     return Container(
       height: 80,
       child: Card(
-        color: amount > 0 ? Colors.green[100] : Colors.red[50],
+        color: amount > 0 ? Colors.green[50] : Colors.red[50],
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
           child: Row(

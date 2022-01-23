@@ -23,8 +23,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final Stream<QuerySnapshot> _movementsStream =
-      FirebaseFirestore.instance.collection('movements').snapshots();
+  final Stream<QuerySnapshot> _movementsStream = FirebaseFirestore.instance
+      .collection('movements')
+      .orderBy('date', descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -36,18 +38,22 @@ class _MyHomePageState extends State<MyHomePage> {
         stream: _movementsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text('Something went wrong');
+            return const Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }
 
           return ListView(
             children: snapshot.data!.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
-              return MovementCard(data['description'], data['account'],
-                  data['amount'], data['date']);
+              return MovementCard(
+                data['description'],
+                data['account'],
+                data['amount'],
+                data['date'],
+              );
             }).toList(),
           );
         },
