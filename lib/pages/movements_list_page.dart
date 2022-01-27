@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 data['account'],
                 data['amount'],
                 data['date'],
+                document.id,
               );
             }).toList(),
           );
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
           size: 40,
         ),
         onPressed: () => {
-          Navigator.of(context).pushNamed('/add'),
+          Navigator.of(context).pushNamed('/movements/add'),
         },
       ),
     );

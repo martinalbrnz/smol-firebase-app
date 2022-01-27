@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:smolapp/pages/main_page.dart';
 import 'pages/add_movements_page.dart';
 import 'pages/movements_list_page.dart';
+import 'pages/tasks_list_page.dart';
 
 void main() async {
   // Me aseguro que se hayan cargado los widgets de Firebase
@@ -23,8 +23,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.amber,
       ),
       routes: {
-        '/': (_) => MovementsListPage(),
-        '/add': (_) => AddMovementPage()
+        '/': (_) => const MainPage(),
+        '/movements': (_) => const MovementsListPage(),
+        '/movements/add': (_) => const AddMovementPage(),
+        '/tasks': (_) => const TasksListPage(),
       },
       initialRoute: '/',
     );

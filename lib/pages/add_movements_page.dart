@@ -1,9 +1,6 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, avoid_print
-
 import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:smolapp/model/movement.dart';
 
 class AddMovementPage extends StatefulWidget {
   const AddMovementPage({Key? key}) : super(key: key);
@@ -31,19 +28,14 @@ class _AddMovementPageState extends State<AddMovementPage> {
     date;
   }
 
-  CollectionReference movements =
-      FirebaseFirestore.instance.collection('movements');
-
-  Future<void> addMovement() {
-    return movements
-        .add({
-          'account': _accountController.text.toUpperCase(),
-          'amount': double.parse(_amountController.text),
-          'description': _descriptionController.text,
-          'date': date
-        })
-        .then((value) => print('Movement Added'))
-        .catchError((onError) => print(onError));
+  Future<void> addMovement() async {
+    await movementsRef.add(
+      Movement(
+          account: _accountController.text.toUpperCase(),
+          amount: double.parse(_amountController.text),
+          description: _descriptionController.text,
+          date: date),
+    );
   }
 
   saveMovement() {
@@ -65,13 +57,13 @@ class _AddMovementPageState extends State<AddMovementPage> {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             children: [
               TextField(
                 controller: _accountController,
                 enabled: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Acount name'),
                   alignLabelWithHint: true,
                   filled: true,
@@ -80,7 +72,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
               TextField(
                 controller: _amountController,
                 enabled: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Enter the amount'),
                   alignLabelWithHint: true,
                   filled: true,
@@ -94,7 +86,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
               TextField(
                 controller: _descriptionController,
                 enabled: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   label: Text('Description'),
                   alignLabelWithHint: true,
                   filled: true,
@@ -106,7 +98,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
                 enabled: true,
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
-                  label: Text('Date'),
+                  label: const Text('Date'),
                   alignLabelWithHint: true,
                   filled: true,
                   suffixIcon: IconButton(
