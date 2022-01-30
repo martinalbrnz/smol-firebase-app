@@ -53,7 +53,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add movements'),
+        title: const Text('Agregar movimiento'),
       ),
       body: Center(
         child: Padding(
@@ -64,7 +64,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
                 controller: _accountController,
                 enabled: true,
                 decoration: const InputDecoration(
-                  label: Text('Acount name'),
+                  label: Text('Nombre de cuenta'),
                   alignLabelWithHint: true,
                   filled: true,
                 ),
@@ -73,21 +73,21 @@ class _AddMovementPageState extends State<AddMovementPage> {
                 controller: _amountController,
                 enabled: true,
                 decoration: const InputDecoration(
-                  label: Text('Enter the amount'),
+                  label: Text('Monto'),
                   alignLabelWithHint: true,
                   filled: true,
                 ),
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(
-                      RegExp(r"(-*[\d]*\.?[\d]*)")), // Only numbers
+                      RegExp(r"^[-]?[\d]*\.?[\d]{0,2}")), // Only numbers
                 ],
               ),
               TextField(
                 controller: _descriptionController,
                 enabled: true,
                 decoration: const InputDecoration(
-                  label: Text('Description'),
+                  label: Text('Descripción'),
                   alignLabelWithHint: true,
                   filled: true,
                 ),
@@ -98,7 +98,7 @@ class _AddMovementPageState extends State<AddMovementPage> {
                 enabled: true,
                 keyboardType: TextInputType.datetime,
                 decoration: InputDecoration(
-                  label: const Text('Date'),
+                  label: const Text('Fecha'),
                   alignLabelWithHint: true,
                   filled: true,
                   suffixIcon: IconButton(

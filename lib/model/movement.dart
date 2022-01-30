@@ -36,9 +36,14 @@ final movementsRef =
         );
 
 Future<void> deleteMovement(movementID) {
-  return movementsRef
-      .doc(movementID)
-      .delete()
-      .then((value) => print(movementID))
-      .catchError((error) => print("Failed to delete"));
+  return movementsRef.doc(movementID).delete();
+}
+
+Future<void> updateMovement(movementID, account, amount, description, date) {
+  return movementsRef.doc(movementID).update({
+    'account': account,
+    'amount': amount,
+    'description': description,
+    'date': date
+  });
 }

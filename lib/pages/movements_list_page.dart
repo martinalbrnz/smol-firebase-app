@@ -41,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return const Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           }
 
           return ListView(

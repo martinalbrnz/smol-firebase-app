@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TasksListPage extends StatelessWidget {
-  const TasksListPage({Key? key}) : super(key: key);
+class AccountsTotals extends StatelessWidget {
+  const AccountsTotals({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tareas'),
+        title: const Text('Totales'),
       ),
       body: const Center(
-        child: Text('MIMIMIMIMI'),
+        child: Text('MIMIMAOSMD'),
       ),
     );
   }
